@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
   AppBar _buildAppBar() {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.portrait),
+        icon: Icon(Icons.portrait, size: 30.0),
         onPressed: () => _scaffoldKey.currentState.openDrawer(),
       ),
       title: Text(_tabs[_activeTab].title),
@@ -48,9 +48,9 @@ class _HomeState extends State<Home> {
       controller: _pageController,
       onPageChanged: _onPageChanged,
       children: <Widget>[
-        Favorite(),
-        Search(),
-        Rank(),
+        FavoritePage(),
+        SearchPage(),
+        RankPage(),
       ],
     );
   }
@@ -146,5 +146,5 @@ class _PageTab {
 const List<_PageTab> _tabs = const <_PageTab>[
   _PageTab(title: 'Favorite', icon: Icons.favorite_border),
   _PageTab(title: 'Search', icon: Icons.search),
-  _PageTab(title: 'Rank', icon: Icons.list),
+  _PageTab(title: 'Rank', icon: Icons.library_books),
 ];

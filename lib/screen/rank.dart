@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Rank extends StatefulWidget {
+class RankPage extends StatefulWidget {
   @override
-  _RankState createState() => _RankState();
+  _RankPageState createState() => _RankPageState();
 }
 
-class _RankState extends State<Rank> {
+class _RankPageState extends State<RankPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
