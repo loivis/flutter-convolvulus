@@ -12,6 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   PageController _pageController;
   int _activePage = 0;
 
@@ -30,11 +31,21 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_pages[_activePage].title),
-      ),
+      key: _scaffoldKey,
+      appBar: _buildAppBar(),
       body: _buildBody(),
       bottomNavigationBar: _buildBNB(),
+      drawer: _buildDrawer(),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: IconButton(
+        icon: Icon(Icons.portrait),
+        onPressed: () => _scaffoldKey.currentState.openDrawer(),
+      ),
+      title: Text(_pages[_activePage].title),
     );
   }
 
@@ -73,6 +84,51 @@ class _HomeState extends State<Home> {
           icon: Icon(page.icon),
         );
       }).toList(),
+    );
+  }
+
+  Drawer _buildDrawer() {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          Container(
+            height: 100.0,
+            child: DrawerHeader(
+              padding: EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+              ),
+              child: Center(
+                child: FlutterLogo(
+                  colors: Theme.of(context).primaryColor,
+                  size: 75.0,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed('/settings');
+              }),
+          ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed('/about');
+              }),
+          Divider(),
+          ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Sign Out'),
+              onTap: () {
+                Navigator.pop(context);
+              }),
+        ],
+      ),
     );
   }
 
