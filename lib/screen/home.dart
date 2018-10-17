@@ -13,14 +13,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  PageController _pageController;
-  int _activePage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
+  PageController _pageController = PageController();
+  int _activeTab = 0;
 
   @override
   void dispose() {
@@ -45,7 +39,7 @@ class _HomeState extends State<Home> {
         icon: Icon(Icons.portrait),
         onPressed: () => _scaffoldKey.currentState.openDrawer(),
       ),
-      title: Text(_pages[_activePage].title),
+      title: Text(_tabs[_activeTab].title),
     );
   }
 
@@ -65,23 +59,23 @@ class _HomeState extends State<Home> {
     if (Theme.of(context).platform == TargetPlatform.iOS) {
       return CupertinoTabBar(
         activeColor: Theme.of(context).primaryColor,
-        currentIndex: _activePage,
+        currentIndex: _activeTab,
         onTap: _onTap,
-        items: _pages.map((page) {
+        items: _tabs.map((tab) {
           return BottomNavigationBarItem(
-            title: Text(page.title),
-            icon: Icon(page.icon),
+            title: Text(tab.title),
+            icon: Icon(tab.icon),
           );
         }).toList(),
       );
     }
     return BottomNavigationBar(
-      currentIndex: _activePage,
+      currentIndex: _activeTab,
       onTap: _onTap,
-      items: _pages.map((page) {
+      items: _tabs.map((tab) {
         return BottomNavigationBarItem(
-          title: Text(page.title),
-          icon: Icon(page.icon),
+          title: Text(tab.title),
+          icon: Icon(tab.icon),
         );
       }).toList(),
     );
@@ -132,25 +126,25 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void _onPageChanged(int page) {
+  void _onPageChanged(int tab) {
     setState(() {
-      this._activePage = page;
+      this._activeTab = tab;
     });
   }
 
-  void _onTap(int page) {
-    _pageController.jumpToPage(page);
+  void _onTap(int tab) {
+    _pageController.jumpToPage(tab);
   }
 }
 
-class _Page {
-  const _Page({this.title, this.icon});
+class _PageTab {
+  const _PageTab({this.title, this.icon});
   final String title;
   final IconData icon;
 }
 
-const List<_Page> _pages = const <_Page>[
-  _Page(title: 'Favorite', icon: Icons.favorite_border),
-  _Page(title: 'Search', icon: Icons.search),
-  _Page(title: 'Rank', icon: Icons.list),
+const List<_PageTab> _tabs = const <_PageTab>[
+  _PageTab(title: 'Favorite', icon: Icons.favorite_border),
+  _PageTab(title: 'Search', icon: Icons.search),
+  _PageTab(title: 'Rank', icon: Icons.list),
 ];
