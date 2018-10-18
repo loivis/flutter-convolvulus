@@ -1,10 +1,12 @@
 import 'package:convvls/data/book.dart';
 
 class Favorite extends Book {
-  String source;
-  String latestChapter;
+  int progress;
+  String latestChapter, source;
+  DateTime update;
 
   Favorite.fromJson(Map<String, dynamic> json)
-      : latestChapter = "┗|｀O′|┛ 嗷~~",
+      : source = json["site"],
+        progress = 0,
         super.fromJson(json);
 }

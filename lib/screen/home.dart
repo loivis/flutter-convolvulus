@@ -28,8 +28,8 @@ class _HomeState extends State<Home> {
       key: _scaffoldKey,
       appBar: _buildAppBar(),
       body: _buildBody(),
-      bottomNavigationBar: _buildBNB(),
       drawer: _buildDrawer(),
+      bottomNavigationBar: _buildBNB(),
     );
   }
 
@@ -52,32 +52,6 @@ class _HomeState extends State<Home> {
         SearchPage(),
         RankPage(),
       ],
-    );
-  }
-
-  Widget _buildBNB() {
-    if (Theme.of(context).platform == TargetPlatform.iOS) {
-      return CupertinoTabBar(
-        activeColor: Theme.of(context).primaryColor,
-        currentIndex: _activeTab,
-        onTap: _onTap,
-        items: _tabs.map((tab) {
-          return BottomNavigationBarItem(
-            title: Text(tab.title),
-            icon: Icon(tab.icon),
-          );
-        }).toList(),
-      );
-    }
-    return BottomNavigationBar(
-      currentIndex: _activeTab,
-      onTap: _onTap,
-      items: _tabs.map((tab) {
-        return BottomNavigationBarItem(
-          title: Text(tab.title),
-          icon: Icon(tab.icon),
-        );
-      }).toList(),
     );
   }
 
@@ -123,6 +97,32 @@ class _HomeState extends State<Home> {
               }),
         ],
       ),
+    );
+  }
+
+  Widget _buildBNB() {
+    if (Theme.of(context).platform == TargetPlatform.iOS) {
+      return CupertinoTabBar(
+        activeColor: Theme.of(context).primaryColor,
+        currentIndex: _activeTab,
+        onTap: _onTap,
+        items: _tabs.map((tab) {
+          return BottomNavigationBarItem(
+            title: Text(tab.title),
+            icon: Icon(tab.icon),
+          );
+        }).toList(),
+      );
+    }
+    return BottomNavigationBar(
+      currentIndex: _activeTab,
+      onTap: _onTap,
+      items: _tabs.map((tab) {
+        return BottomNavigationBarItem(
+          title: Text(tab.title),
+          icon: Icon(tab.icon),
+        );
+      }).toList(),
     );
   }
 

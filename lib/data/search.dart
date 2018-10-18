@@ -18,7 +18,10 @@ class Search {
     }
 
     json.decode(resp.body).forEach((item) {
-      _books.add(Book.fromJson(item));
+      var book = Book.fromJson(item);
+      print('item: $item');
+      print('book: $book');
+      _books.add(book);
     });
 
     print('return ${_books.length} results from backend for "$keywords"');

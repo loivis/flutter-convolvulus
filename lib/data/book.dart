@@ -20,22 +20,24 @@ class Book {
 
   Book.fromJson(Map<String, dynamic> json)
       : author = json['author'],
-        chapterLink = json['chapterLink'],
+        chapterLink = json['chapter_link'],
         id = json['id'],
         image = json['image'],
         intro = json['intro'],
+        link = json['link'],
         site = json['site'],
         title = json['title'];
+  // update = DateTime.parse(json['update']);
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'site': site,
-        'link': link,
         'author': author,
-        'introduction': intro,
+        'chapter_link': chapterLink,
+        'id': id,
         'image': image,
-        'chapterLink': chapterLink,
+        'intro': intro,
+        'link': link,
+        'site': site,
+        'title': title,
         'update': update,
       };
 
