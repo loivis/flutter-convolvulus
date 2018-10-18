@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:convvls/data/book.dart';
+import 'package:convvls/data/favorite.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,30 +9,36 @@ class FavoriteModel extends Model {
   // _prefs saves _favorite
   SharedPreferences _prefs;
 
-  Map<String, Book> _favorite = {};
-  Map<String, Book> get favorite => _favorite;
+  Map<String, Favorite> _favorite = {};
+  Map<String, Favorite> get favorite => _favorite;
 
   readFavorite() async {
     if (_prefs == null) {
       _prefs = await SharedPreferences.getInstance();
     }
 
-    var favString = _prefs.getString('favorite');
+    String favString = _prefs.getString('favorite');
     print('favString from shared preferences: "$favString"');
+
     if (favString != null) {
       Map<String, dynamic> favJson = json.decode(favString);
       favJson.forEach((k, v) {
-        var book = Book.fromJson(v);
-        _favorite.addAll({book.key: book});
+        Favorite fav = Favorite.fromJson(v);
+        _favorite.addAll({fav.key: fav});
       });
+
+      if (_favorite.keys.length == 0) {
+        return;
+      }
+
       notifyListeners();
     }
   }
 
   bool isFavorite(String key) {
-    var keys = _favorite.keys;
+    Iterable<String> keys = _favorite.keys;
     print('check favorite: $key');
-    print('${keys.length} books in favorite: $keys');
+    print('${keys.length} favorite: $keys');
     if (keys.contains(key)) {
       return true;
     }
@@ -43,8 +50,9 @@ class FavoriteModel extends Model {
       _prefs = await SharedPreferences.getInstance();
     }
 
-    print('add "${book.key}" to favorite');
-    _favorite.addAll({book.key: book});
+    Favorite fav = book as Favorite;
+    print('add "${fav.key}" to favorite');
+    _favorite.addAll({fav.key: fav});
     _prefs.setString('favorite', json.encode(_favorite));
 
     notifyListeners();

@@ -9,7 +9,7 @@ class Search {
   Future<List<Book>> get(String keywords) async {
     List<Book> _books = [];
 
-    var url = 'https://convvls.herokuapp.com/search?keywords=' + keywords;
+    String url = 'https://convvls.herokuapp.com/search?keywords=' + keywords;
     print(url);
     final resp = await http.get(url);
     if (resp.statusCode != 200) {
