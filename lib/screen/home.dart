@@ -144,7 +144,7 @@ class _PageTab {
 }
 
 const List<_PageTab> _tabs = const <_PageTab>[
-  _PageTab(title: 'Favorite', icon: Icons.favorite_border),
-  _PageTab(title: 'Search', icon: Icons.search),
-  _PageTab(title: 'Rank', icon: Icons.library_books),
+  _PageTab(title: '收藏', icon: Icons.favorite_border),
+  _PageTab(title: '搜索', icon: Icons.search),
+  _PageTab(title: '排行', icon: Icons.library_books),
 ];
