@@ -146,22 +146,25 @@ class _SearchPageState extends State<SearchPage> {
 
     int i = (index / 2 - 1).round();
     return ScopedModelDescendant<MainModel>(
-        builder: (context, child, model) => Row(children: <Widget>[
-              IconButton(
-                padding: EdgeInsets.all(0.0),
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  model.removeFromSearchHistory(i);
-                },
-              ),
-              FlatButton(
-                padding: EdgeInsets.all(0.0),
-                child: Text(history[i], textAlign: TextAlign.left),
-                onPressed: () {
-                  model.startSearch(history[i]);
-                },
-              ),
-            ]));
+        builder: (context, child, model) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Text(history[i], textAlign: TextAlign.left),
+                  onPressed: () {
+                    model.startSearch(history[i]);
+                  },
+                ),
+                IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    model.removeFromSearchHistory(i);
+                  },
+                ),
+              ],
+            ));
   }
 
   _buildSearchResult(model) {
