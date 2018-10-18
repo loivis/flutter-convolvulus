@@ -85,11 +85,8 @@ class _SearchPageState extends State<SearchPage> {
       builder: (context, child, model) {
         if (model.searchProgress == 'ready') {
           List<String> history = model.searchHistory;
-          if (history == null) {
-            model.readSearchHistory();
-            return Center(child: Text('ready to search'));
-          }
           if (history.length == 0) {
+            model.readSearchHistory();
             return Center(child: Text('ready to search'));
           }
           return ListView.builder(

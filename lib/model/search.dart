@@ -13,7 +13,7 @@ class SearchModel extends Model {
   String _progress = 'ready';
   String get searchProgress => _progress;
 
-  List<String> _searchHistory;
+  List<String> _searchHistory = [];
   List<String> get searchHistory => _searchHistory;
 
   Future startSearch(String keywords) async {
@@ -33,9 +33,9 @@ class SearchModel extends Model {
     _searchHistory.insert(0, keywords);
     _prefs.setStringList('searchHistory', _searchHistory);
 
-    _books = await Search(keywords).get();
+    _books = await Search().get(keywords);
     _progress = 'done';
-    print('search returns ${_books.length} results for "$keywords"');
+    print('search model returns ${_books.length} results for "$keywords"');
 
     notifyListeners();
   }
@@ -52,9 +52,9 @@ class SearchModel extends Model {
     }
 
     print('read search history');
-    if (_searchHistory == null) {
-      _searchHistory = _prefs.getStringList('searchHistory');
-      print('saved search: $_searchHistory');
+    _searchHistory = _prefs.getStringList('searchHistory');
+    print('saved search: $_searchHistory');
+    if (_searchHistory.length != 0) {
       notifyListeners();
     }
   }

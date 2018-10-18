@@ -18,12 +18,14 @@ class Book {
     this.update,
   );
 
-  Book.fromFavorite(Map<String, dynamic> json)
-      : id = json['id'],
-        title = json['title'],
-        site = json['site'],
+  Book.fromJson(Map<String, dynamic> json)
+      : author = json['author'],
+        chapterLink = json['chapterLink'],
+        id = json['id'],
         image = json['image'],
-        chapterLink = json['chapterLink'];
+        intro = json['intro'],
+        site = json['site'],
+        title = json['title'];
 
   Map<String, dynamic> toJson() => {
         'id': id,
