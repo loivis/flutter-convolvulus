@@ -3,6 +3,7 @@ import 'package:convvls/model/main.dart';
 import 'package:convvls/screen/book.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/services.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class SearchPage extends StatefulWidget {
@@ -154,6 +155,8 @@ class _SearchPageState extends State<SearchPage> {
                   onPressed: () {
                     _textController.text = history[i];
                     model.startSearch(history[i]);
+                    // Focus.clear(context);
+                    SystemChannels.textInput.invokeMethod('TextInput.hide');
                   },
                 ),
                 IconButton(
