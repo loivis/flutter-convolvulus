@@ -58,7 +58,6 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     onSubmitted: (String keywords) async {
                       if (keywords == "") {
-                        model.resetSearch();
                         return;
                       }
                       model.startSearch(_textController.text);
@@ -153,6 +152,7 @@ class _SearchPageState extends State<SearchPage> {
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Text(history[i], textAlign: TextAlign.left),
                   onPressed: () {
+                    _textController.text = history[i];
                     model.startSearch(history[i]);
                   },
                 ),
@@ -199,7 +199,7 @@ class _SearchPageState extends State<SearchPage> {
                 builder: (BuildContext context) => BookPage(book),
               ),
             );
-          }, // route to book page
+          },
         ),
       );
     };
