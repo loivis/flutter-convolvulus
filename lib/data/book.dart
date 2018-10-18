@@ -4,7 +4,7 @@ class Book {
   String author, chapterLink, id, image, intro, link, site, title;
   DateTime update;
 
-  String get key => this.site + this.author + this.title + this.id;
+  String get key => [this.site, this.author, this.title, this.id].join('_');
 
   Book(
     this.author,
