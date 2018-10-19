@@ -64,6 +64,9 @@ class FavoritePage extends StatelessWidget {
           title: Text(fav.title),
           subtitle: subtitle,
           onTap: () {}, // route to book reading
+          onLongPress: () {
+            model.removeFavorite(fav.key);
+          },
         );
       };
 
