@@ -1,4 +1,4 @@
-import 'package:convvls/data/favorite.dart';
+import 'package:convvls/model/favorite.dart';
 import 'package:convvls/model/main.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';

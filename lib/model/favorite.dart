@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:convvls/data/book.dart';
+import 'package:convvls/model/book.dart';
 import 'package:convvls/data/chapter.dart';
 import 'package:convvls/data/chapters.dart';
-import 'package:convvls/data/favorite.dart';
 import 'package:convvls/data/search.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'favorite.g.dart';
 
 class FavoriteModel extends Model {
   // _prefs saves _favorite
@@ -100,4 +102,68 @@ class FavoriteModel extends Model {
     _prefs.setString('favorite', _favorite.toString());
     notifyListeners();
   }
+}
+
+@JsonSerializable()
+class Favorite extends Book {
+  int progress;
+  String latestChapter, source;
+  Map<String, List<Chapter>> sources;
+
+  Favorite(
+    author,
+    chapterLink,
+    id,
+    image,
+    intro,
+    link,
+    site,
+    title,
+    update,
+    this.progress,
+    this.latestChapter,
+    this.sources,
+  ) : super(
+          author,
+          chapterLink,
+          id,
+          image,
+          intro,
+          link,
+          site,
+          title,
+          update,
+        );
+
+  factory Favorite.fromJson(Map<String, dynamic> json) =>
+      _$FavoriteFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FavoriteToJson(this);
+
+  // Favorite.fromJson(Map<String, dynamic> json)
+  //     : latestChapter = json['latest_chapter'] ?? 'n/a',
+  //       progress = json['progress'] ?? 0,
+  //       source = json['source'] ?? json['site'],
+  //       sources = {},
+  //       super.fromJson(json);
+
+  // Map<String, dynamic> toJson() => {
+  //       'author': author,
+  //       'chapter_link': chapterLink,
+  //       'id': id,
+  //       'image': image,
+  //       'intro': intro,
+  //       'link': link,
+  //       'progress': progress,
+  //       'site': site,
+  //       'source': source,
+  //       'sources': {},
+  //       'title': title,
+  //       'update': update,
+  //     };
+
+  // @override
+  // String toString() {
+  //   return json.encode(this.toJson());
+  // }
 }

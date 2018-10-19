@@ -1,4 +1,4 @@
-import 'package:convvls/data/book.dart';
+import 'package:convvls/model/book.dart';
 import 'package:convvls/data/search.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';

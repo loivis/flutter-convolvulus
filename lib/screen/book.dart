@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:convvls/data/book.dart';
+import 'package:convvls/model/book.dart';
 import 'package:convvls/model/main.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';

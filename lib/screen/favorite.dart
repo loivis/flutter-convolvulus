@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:convvls/data/favorite.dart';
+import 'package:convvls/model/favorite.dart';
 import 'package:convvls/model/main.dart';
 import 'package:convvls/screen/text.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:convvls/data/book.dart';
+import 'package:convvls/model/book.dart';
 import 'package:convvls/model/main.dart';
 import 'package:convvls/screen/book.dart';
 import 'package:flutter/material.dart';

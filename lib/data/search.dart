@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:convvls/data/book.dart';
+import 'package:convvls/model/book.dart';
 import 'package:convvls/data/chapter.dart';
 import 'package:http/http.dart' as http;
 
