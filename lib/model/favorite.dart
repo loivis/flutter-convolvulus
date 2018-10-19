@@ -4,6 +4,7 @@ import 'package:convvls/data/book.dart';
 import 'package:convvls/data/chapter.dart';
 import 'package:convvls/data/chapters.dart';
 import 'package:convvls/data/favorite.dart';
+import 'package:convvls/data/search.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,11 +30,23 @@ class FavoriteModel extends Model {
     Map<String, dynamic> favJson = json.decode(favString);
     favJson.forEach((k, v) async {
       Favorite fav = Favorite.fromJson(v);
-      Chapter latest = await Chapters().latest(fav.source, fav.title);
-      if (latest != null) {
-        fav.latestChapter = latest.title;
-        print(fav.latestChapter);
-        print(fav);
+
+      List<String> sites = await Search().name(fav.title);
+      // TODO: forEach => for...in or takeWhile() in order to break?
+      // if (sites.length == 0) {
+      //   break;
+      // }
+      for (var site in sites) {
+        fav.sources.addAll({site: []});
+      }
+      fav.sources.addAll({fav.site: []});
+      print(fav.sources);
+
+      List<Chapter> chapters = await Chapters().all(fav.source, fav.title);
+      if (chapters.length != 0) {
+        int idx = chapters.length - 1;
+        fav.latestChapter = chapters[idx].title;
+        fav.sources[fav.source] = chapters;
       }
 
       _favorite.addAll({fav.key: fav});

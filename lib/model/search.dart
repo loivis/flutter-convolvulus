@@ -33,7 +33,7 @@ class SearchModel extends Model {
     _searchHistory.insert(0, keywords);
     _prefs.setStringList('searchHistory', _searchHistory);
 
-    _books = await Search().get(keywords);
+    _books = await Search().keywords(keywords);
     _progress = 'done';
     print('search model returns ${_books.length} results for "$keywords"');
 

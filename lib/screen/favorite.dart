@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:convvls/data/favorite.dart';
 import 'package:convvls/model/main.dart';
+import 'package:convvls/screen/text.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -38,6 +39,10 @@ class FavoritePage extends StatelessWidget {
           errorWidget: new Icon(Icons.error),
         );
 
+        Icon updateIndicator = fav.sources[fav.source].length > fav.progress
+            ? Icon(Icons.bookmark_border, color: Colors.grey, size: 15.0)
+            : Icon(Icons.bookmark, color: Colors.red, size: 15.0);
+
         Column subtitle = Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -52,8 +57,7 @@ class FavoritePage extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                // TODO: show if there is update
-                Icon(Icons.new_releases, color: Colors.red, size: 15.0),
+                updateIndicator,
               ],
             ),
           ],
@@ -63,7 +67,13 @@ class FavoritePage extends StatelessWidget {
           leading: leading,
           title: Text(fav.title),
           subtitle: subtitle,
-          onTap: () {}, // route to book reading
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => TextPage(fav),
+              ),
+            );
+          },
           onLongPress: () {
             model.removeFavorite(fav.key);
           },
