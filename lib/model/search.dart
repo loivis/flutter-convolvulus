@@ -54,9 +54,15 @@ class SearchModel extends Model {
     print('read search history');
     _searchHistory = _prefs.getStringList('searchHistory');
     print('saved search: $_searchHistory');
-    if (_searchHistory.length != 0) {
-      notifyListeners();
+
+    if (_searchHistory == null) {
+      _searchHistory = [];
     }
+    if (_searchHistory.length == 0) {
+      return;
+    }
+
+    notifyListeners();
   }
 
   void removeFromSearchHistory(int i) async {

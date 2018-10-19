@@ -39,10 +39,6 @@ class FavoritePage extends StatelessWidget {
           errorWidget: new Icon(Icons.error),
         );
 
-        Icon updateIndicator = fav.sources[fav.source].length > fav.progress
-            ? Icon(Icons.bookmark_border, color: Colors.grey, size: 15.0)
-            : Icon(Icons.bookmark, color: Colors.red, size: 15.0);
-
         Column subtitle = Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -57,7 +53,10 @@ class FavoritePage extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                updateIndicator,
+                fav.sources[fav.source].length > fav.progress
+                    ? Icon(Icons.bookmark, color: Colors.red, size: 15.0)
+                    : Icon(Icons.bookmark_border,
+                        color: Colors.grey, size: 15.0),
               ],
             ),
           ],

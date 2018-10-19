@@ -27,6 +27,10 @@ class FavoriteModel extends Model {
     String favString = _prefs.getString('favorite');
     print('favString from shared preferences: "$favString"');
 
+    if (favString == null) {
+      return;
+    }
+
     Map<String, dynamic> favJson = json.decode(favString);
     favJson.forEach((k, v) async {
       Favorite fav = Favorite.fromJson(v);

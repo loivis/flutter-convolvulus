@@ -30,13 +30,14 @@ class Chapters {
       return _chapters;
     }
 
+    print("response body: ${resp.body}");
     Map<String, dynamic> bodyJson = json.decode(resp.body);
     bodyJson["chapters"].forEach((item) {
-      // print(item);
+      print(item);
       _chapters.add(Chapter.fromJson(item));
     });
 
-    print('return ${_chapters.length} results from backend for "$bookName"');
+    print('return ${_chapters.length} chapters from backend for "$bookName"');
     return _chapters;
   }
 }
