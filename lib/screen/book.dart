@@ -68,17 +68,17 @@ class _BookPageState extends State<BookPage> {
                 children: <Widget>[
                   Container(
                       margin: EdgeInsets.all(5.0),
-                      child: Text(
-                          widget.book.title + ' by ' + widget.book.author,
+                      child: Text(widget.book.title,
                           style: TextStyle(fontWeight: FontWeight.bold))),
                   Container(
                       margin: EdgeInsets.all(5.0),
                       child: Text([
+                        widget.book.author,
                         widget.book.site,
                       ].join(' | '))),
                   Container(
                       margin: EdgeInsets.all(5.0),
-                      child: Text('last update time')),
+                      child: Text(widget.book.update)),
                 ],
               ),
             ],

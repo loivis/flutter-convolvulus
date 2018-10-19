@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:convvls/data/book.dart';
 import 'package:convvls/data/chapter.dart';
 import 'package:convvls/data/chapters.dart';
 import 'package:convvls/data/favorite.dart';
-import 'package:convvls/data/search.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,22 +28,20 @@ class FavoriteModel extends Model {
 
     Map<String, dynamic> favJson = json.decode(favString);
     favJson.forEach((k, v) async {
-      v["source"] = v["site"];
       Favorite fav = Favorite.fromJson(v);
-      // fav.source = fav.site;
-      // if (fav.latestChapter == null) {
       Chapter latest = await Chapters().latest(fav.source, fav.title);
       if (latest != null) {
         fav.latestChapter = latest.title;
         print(fav.latestChapter);
+        print(fav);
       }
-      print(fav);
-      // }
+
       _favorite.addAll({fav.key: fav});
+      print('set favorites: $_favorite');
+      _prefs.setString('favorite', json.encode(_favorite));
+
       notifyListeners();
     });
-    print('set favorites: $_favorite');
-    _prefs.setString('favorite', json.encode(_favorite));
 
     refreshFav = false;
 

@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 class Book {
-  String author, chapterLink, id, image, intro, link, site, title;
-  DateTime update;
+  String author, chapterLink, id, image, intro, link, site, title, update;
 
   String get key => [this.site, this.author, this.title, this.id].join('_');
 
@@ -26,8 +25,9 @@ class Book {
         intro = json['intro'],
         link = json['link'],
         site = json['site'],
-        title = json['title'];
-  // update = DateTime.parse(json['update']);
+        title = json['title'],
+        update =
+            json['update'] == null ? '2018-02-03T00:00:00Z' : json['update'];
 
   Map<String, dynamic> toJson() => {
         'author': author,
