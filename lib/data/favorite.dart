@@ -8,10 +8,9 @@ class Favorite extends Book {
   Map<String, List<Chapter>> sources;
 
   Favorite.fromJson(Map<String, dynamic> json)
-      : latestChapter =
-            json['latest_chapter'] == null ? 'n/a' : json['latest_chapter'],
-        progress = json['progress'] == null ? 0 : json['progress'],
-        source = json['source'] == null ? json['site'] : json['source'],
+      : latestChapter = json['latest_chapter'] ?? 'n/a',
+        progress = json['progress'] ?? 0,
+        source = json['source'] ?? json['site'],
         sources = {},
         super.fromJson(json);
 
@@ -25,6 +24,7 @@ class Favorite extends Book {
         'progress': progress,
         'site': site,
         'source': source,
+        'sources': {},
         'title': title,
         'update': update,
       };

@@ -11,9 +11,9 @@ class Chapter {
   );
 
   Chapter.fromJson(Map<String, dynamic> json)
-      : link = json['link'] == null ? json['chapter_link'] : json['link'],
-        site = json['site'] == null ? '' : json['site'],
-        text = json['text'] == null ? '' : json['text'],
+      : link = json['link'] ?? json['chapter_link'],
+        site = json['site'] ?? '',
+        text = json['text'] ?? '',
         title = json['title'],
         update = json['update'];
 

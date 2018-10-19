@@ -26,8 +26,7 @@ class Book {
         link = json['link'],
         site = json['site'],
         title = json['title'],
-        update =
-            json['update'] == null ? '2018-02-03T00:00:00Z' : json['update'];
+        update = json['update'] ?? '2018-02-03T00:00:00Z';
 
   Map<String, dynamic> toJson() => {
         'author': author,

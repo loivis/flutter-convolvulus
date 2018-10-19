@@ -49,7 +49,7 @@ class FavoritePage extends StatelessWidget {
                 Container(
                   width: 250,
                   child: Text(
-                    fav.latestChapter == null ? 'n/a' : fav.latestChapter,
+                    fav.latestChapter ?? 'n/a',
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
