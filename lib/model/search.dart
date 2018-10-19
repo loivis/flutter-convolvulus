@@ -52,15 +52,13 @@ class SearchModel extends Model {
     }
 
     print('read search history');
-    _searchHistory = _prefs.getStringList('searchHistory');
-    print('saved search: $_searchHistory');
-
-    if (_searchHistory == null) {
-      _searchHistory = [];
-    }
-    if (_searchHistory.length == 0) {
+    List<String> saved = _prefs.getStringList('searchHistory');
+    print('saved search history: $saved');
+    if (saved == null || saved.length == 0) {
       return;
     }
+
+    _searchHistory = saved;
 
     notifyListeners();
   }
